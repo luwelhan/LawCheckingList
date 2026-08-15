@@ -1,0 +1,6 @@
+{
+  "name": "建築技術規則法規檢索工具",
+  "description": "提供中華民國《建築技術規則》關鍵字即時檢索、來源法規佐證與美化法規附表檢視工具",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
