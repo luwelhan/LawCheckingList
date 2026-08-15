@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Search, X, Table as TableIcon, Filter, Layers, Sparkles } from 'lucide-react';
+import { Search, X, Table as TableIcon, Filter, Layers, Sparkles, RotateCcw } from 'lucide-react';
 import { POPULAR_KEYWORDS } from '../data/regulationsData';
 import { RegulationSection } from '../types';
 
@@ -50,7 +50,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 shadow-xs p-4 sm:p-5">
+    <div id="search-bar-container" className="bg-white rounded-xl border border-slate-200 shadow-xs p-4 sm:p-5">
       {/* Search Input Bar */}
       <div className="relative flex items-center">
         <div className="absolute left-3.5 text-slate-400 pointer-events-none">
@@ -64,17 +64,24 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => onQueryChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="輸入關鍵字或條號（例：33、樓梯寬度、停車位、防火時效、無障礙、活載重）..."
-          className="w-full pl-11 pr-24 py-3 bg-slate-50 border border-slate-200 focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100 rounded-lg text-slate-900 text-sm sm:text-base outline-none transition-all placeholder:text-slate-400 font-normal"
+          className="w-full pl-11 pr-32 py-3 bg-slate-50 border border-slate-200 focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100 rounded-lg text-slate-900 text-sm sm:text-base outline-none transition-all placeholder:text-slate-400 font-normal"
         />
 
         <div className="absolute right-2 flex items-center gap-1.5">
+          {/* Desktop shortcut hint */}
+          {!query && (
+            <span className="hidden sm:inline-flex items-center text-[10px] text-slate-400 font-mono bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200 pointer-events-none mr-1">
+              Ctrl+K
+            </span>
+          )}
+
           {query && (
             <button
               id="clear-search-query-btn"
               type="button"
               onClick={onClear}
-              className="p-1.5 text-slate-400 hover:text-slate-600 rounded-md hover:bg-slate-100 transition-colors"
-              title="清除輸入"
+              className="p-1.5 text-slate-400 hover:text-slate-600 rounded-md hover:bg-slate-100 transition-colors cursor-pointer"
+              title="清除輸入 (Esc)"
             >
               <X className="w-4 h-4" />
             </button>
@@ -84,7 +91,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             id="submit-search-btn"
             type="button"
             onClick={() => onSearchSubmit()}
-            className="px-3.5 py-1.5 bg-sky-700 hover:bg-sky-800 text-white font-medium text-xs sm:text-sm rounded-md transition-colors shadow-xs"
+            className="px-3.5 py-1.5 bg-sky-700 hover:bg-sky-800 text-white font-medium text-xs sm:text-sm rounded-md transition-colors shadow-xs cursor-pointer"
           >
             檢索
           </button>
@@ -107,7 +114,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 id={`filter-section-${sec.value}`}
                 type="button"
                 onClick={() => onSectionFilterChange(sec.value)}
-                className={`px-2.5 py-1 text-xs rounded-md font-medium transition-all ${
+                className={`px-2.5 py-1 text-xs rounded-md font-medium transition-all cursor-pointer ${
                   isActive
                     ? 'bg-sky-800 text-white shadow-xs'
                     : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
@@ -127,14 +134,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               type="checkbox"
               checked={onlyWithTables}
               onChange={(e) => onToggleOnlyWithTables(e.target.checked)}
-              className="w-3.5 h-3.5 text-amber-600 rounded border-amber-300 focus:ring-amber-500"
+              className="w-3.5 h-3.5 text-amber-600 rounded border-amber-300 focus:ring-amber-500 cursor-pointer"
             />
             <TableIcon className="w-3.5 h-3.5 text-amber-700" />
             <span>僅顯示含法定附表 (附表專區)</span>
           </label>
 
-          <span className="text-xs text-slate-700 bg-slate-50 px-2 py-1 rounded border border-slate-100 font-mono">
-            檢索結果：<strong>{resultCount}</strong> 筆
+          <span className="text-xs text-slate-700 bg-slate-50 px-2.5 py-1 rounded border border-slate-200 font-mono">
+            結果：<strong className="text-sky-900">{resultCount}</strong> 筆
           </span>
         </div>
       </div>
@@ -151,7 +158,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             id={`quick-kw-${kw}`}
             type="button"
             onClick={() => handleQuickKeyword(kw)}
-            className="px-2 py-0.5 text-xs bg-slate-50 hover:bg-sky-50 text-slate-600 hover:text-sky-700 rounded border border-slate-200 hover:border-sky-200 transition-colors"
+            className="px-2 py-0.5 text-xs bg-slate-50 hover:bg-sky-50 text-slate-600 hover:text-sky-700 rounded border border-slate-200 hover:border-sky-200 transition-colors cursor-pointer"
           >
             {kw}
           </button>
@@ -160,3 +167,4 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     </div>
   );
 };
+

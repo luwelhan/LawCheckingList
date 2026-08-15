@@ -4,6 +4,8 @@ export type RegulationSection =
   | '建築構造編'
   | '建築設備編';
 
+export type ViewMode = 'split' | 'cards' | 'dense';
+
 export interface RegulationTable {
   id: string;
   title: string;
@@ -46,3 +48,13 @@ export interface ViewedArticleItem {
   title?: string;
   timestamp: number;
 }
+
+export type ExportFormat = 'markdown' | 'text' | 'html';
+
+export interface ChapterGroup {
+  section: string;
+  chapter: string;
+  count: number;
+  articles: RegulationArticle[];
+}
+
