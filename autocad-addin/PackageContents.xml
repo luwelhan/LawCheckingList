@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0" AutodeskProduct="AutoCAD" ProductType="Application"
+                    Name="LawCheckingList" AppVersion="1.0.0"
+                    Description="建築技術規則法規檢索工具（AutoCAD 面板）"
+                    ProductCode="{8C3A1F52-6B0D-4E8B-A7C2-5D9E3F41B6A7}">
+  <CompanyDetails Name="LawCheckingList" />
+  <Components>
+    <RuntimeRequirements OS="Win64" Platform="AutoCAD*" SeriesMin="R24.0" SeriesMax="R24.3" />
+    <ComponentEntry AppName="LawCheckingList" ModuleName="./Contents/LawCheckingList.AutoCAD.dll"
+                    AppDescription="輸入 LAWCHECK 開啟建築技術規則檢索面板" LoadOnAutoCADStartup="True">
+      <Commands GroupName="LAWCHECK">
+        <Command Local="LAWCHECK" Global="LAWCHECK" />
+      </Commands>
+    </ComponentEntry>
+  </Components>
+</ApplicationPackage>
